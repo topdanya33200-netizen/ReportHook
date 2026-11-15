@@ -140,7 +140,7 @@ async function main () {
   check('console: info includes the chat evidence', info && /ez/.test(info) && /cant touch me/.test(info))
   const list = await consoleCommand('reports list all', /#1 Steve/)
   check('console: list shows every report', list && /#2 Alex/.test(list))
-  check('console: history of a player', await consoleCommand('reports history Steve', /reports against Steve/))
+  check('console: history of a player', await consoleCommand('reports history Steve', /Reports against Steve/))
   check('console: /report is for players only', await consoleCommand('report Steve test', /Only players can do that/))
   check('console: reload', await consoleCommand('reports reload', /Configuration and messages reloaded/))
 

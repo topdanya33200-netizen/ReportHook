@@ -1,6 +1,7 @@
 # ReportHook
 
 [![Build](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/build.yml/badge.svg)](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/build.yml)
+[![Server test](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/server-test.yml/badge.svg)](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/server-test.yml)
 ![Paper 26.x](https://img.shields.io/badge/Paper-26.x-blue)
 ![Folia](https://img.shields.io/badge/Folia-supported-brightgreen)
 ![Java 25](https://img.shields.io/badge/Java-25-orange)
@@ -138,8 +139,12 @@ src/main/java/.../reporthook
   at the same time can't overwrite each other.
 - **Security:** player input is inserted with unparsed MiniMessage placeholders, `§` codes are stripped, the
   webhook token never shows up in logs, and every Discord payload restricts mentions.
-- **Tests:** 50 JUnit tests cover the SQLite repository, Discord payloads, escaping, URL parsing, rate-limit
-  handling, cooldowns and chat history. They run on every push in GitHub Actions.
+- **Unit tests:** 50 JUnit tests cover the SQLite repository, Discord payloads, escaping, URL parsing, rate-limit
+  handling, cooldowns and chat history.
+- **End-to-end test on real servers:** on every push, GitHub Actions starts Paper 26.1 and 26.3, joins two bot
+  players and plays the whole flow: reports with and without the menu, spam protection, the staff menu, console
+  commands and teleport. A stand-in for the Discord API checks every webhook request, including a retry after
+  HTTP 429. See [`.github/server-test`](.github/server-test).
 
 ## License
 

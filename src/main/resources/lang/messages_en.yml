@@ -69,7 +69,7 @@ staff:
   unknown-filter: "<prefix><red>Unknown filter <white><filter></white>. Use active, open, claimed, closed or all."
   history:
     empty: "<prefix><gray><white><name></white> has never been reported."
-    header: "<prefix><gray>Last <white><count></white> reports against <white><name></white>:"
+    header: "<prefix><gray>Reports against <white><name></white>, newest first (<white><count></white>):"
     entry: "<click:run_command:'/reports info {id}'><hover:show_text:'<gray>Show details'><dark_gray>#<id></dark_gray> <status> <gray><reason> <dark_gray>(<age> ago, by <reporter>)</dark_gray></hover></click>"
   list:
     empty: "<prefix><gray>No <filter><gray> reports."

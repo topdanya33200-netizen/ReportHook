@@ -1,6 +1,7 @@
 # ReportHook
 
 [![Build](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/build.yml/badge.svg)](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/build.yml)
+[![Server test](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/server-test.yml/badge.svg)](https://github.com/topdanya33200-netizen/ReportHook/actions/workflows/server-test.yml)
 ![Paper 26.x](https://img.shields.io/badge/Paper-26.x-blue)
 ![Folia](https://img.shields.io/badge/Folia-supported-brightgreen)
 ![Java 25](https://img.shields.io/badge/Java-25-orange)
@@ -93,8 +94,12 @@
   нажавшие одновременно, не перезапишут друг друга.
 - **Безопасность:** ввод игроков подставляется как unparsed-плейсхолдеры MiniMessage, `§`-коды вырезаются,
   токен вебхука не попадает в логи, а каждый запрос в Discord ограничивает упоминания.
-- **Тесты:** 50 тестов JUnit покрывают SQLite-хранилище, сообщения для Discord, экранирование, разбор URL,
-  обработку rate limit, кулдауны и историю чата. Они запускаются в GitHub Actions при каждом пуше.
+- **Юнит-тесты:** 50 тестов JUnit покрывают SQLite-хранилище, сообщения для Discord, экранирование, разбор URL,
+  обработку rate limit, кулдауны и историю чата.
+- **Сквозной тест на настоящих серверах:** при каждом пуше GitHub Actions запускает Paper 26.1 и 26.3, заводит
+  двух ботов-игроков и проходит весь сценарий: жалобы с меню и без, защиту от спама, меню модератора, команды
+  консоли и телепорт. Заглушка вместо Discord API проверяет каждый запрос вебхука, включая повтор после HTTP 429.
+  Подробности в [`.github/server-test`](.github/server-test).
 
 ## Лицензия
 

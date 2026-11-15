@@ -51,6 +51,7 @@ echo "eula=true" > server/eula.txt
 cat > server/server.properties <<'EOF'
 online-mode=false
 enforce-secure-profile=false
+white-list=false
 level-type=minecraft\:flat
 generate-structures=false
 spawn-protection=0
@@ -87,7 +88,10 @@ for _ in $(seq 1 300); do
   sleep 1
 done
 grep -q 'Done (' server.log || { tail -n 100 server.log; echo "::error::Paper did not start in time"; exit 1; }
-grep -E "\[(ReportHook|ViaVersion|ViaBackwards)\]|Done \(" server.log || true
+# Newer versions enable the whitelist by default; the bots must be able to join
+echo "whitelist off" >> console.in
+for _ in $(seq 1 20); do grep -qi "whitelist is" server.log && break; sleep 0.5; done
+grep -E "\[(ReportHook|ViaVersion|ViaBackwards)\]|Done \(|[Ww]hitelist is" server.log || true
 echo "::endgroup::"
 
 echo "::group::Scenario"
