@@ -16,3 +16,7 @@ bin/
 # OS
 .DS_Store
 Thumbs.db
+
+# Server test dependencies
+.github/server-test/node_modules/
+.github/server-test/package-lock.json
