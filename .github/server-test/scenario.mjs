@@ -53,7 +53,14 @@ function joinBot (username) {
       console.log(`      [${username} sees] ${message.replace(/\n/g, ' | ')}`)
     })
     const timer = setTimeout(() => reject(new Error(`${username} did not spawn in time`)), 60000)
-    bot.once('spawn', () => { clearTimeout(timer); resolve(bot) })
+    bot.once('spawn', () => {
+      clearTimeout(timer)
+      // Anything that drops the bot later is worth seeing in the CI log
+      bot.on('kicked', (reason) => console.log(`      [${username} kicked] ${JSON.stringify(reason)}`))
+      bot.on('error', (error) => console.log(`      [${username} error] ${error?.stack ?? error}`))
+      bot.on('end', (reason) => console.log(`      [${username} disconnected] ${reason}`))
+      resolve(bot)
+    })
     bot.once('kicked', (reason) => reject(new Error(`${username} was kicked: ${JSON.stringify(reason)}`)))
     bot.once('error', reject)
   })

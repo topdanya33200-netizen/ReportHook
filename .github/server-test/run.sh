@@ -120,4 +120,9 @@ if grep -n "\.reporthook\." server.log; then
   echo "::error::ReportHook logged a stack trace, see server.log"
   STATUS=1
 fi
+if [ "$STATUS" -ne 0 ]; then
+  echo "::group::Server log (warnings, errors and connections)"
+  grep -n -i -E "WARN|ERROR|exception|lost connection|disconnect|kicked|left the game|joined the game" server.log | head -n 200 || true
+  echo "::endgroup::"
+fi
 exit "$STATUS"
