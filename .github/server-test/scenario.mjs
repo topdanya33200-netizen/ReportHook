@@ -12,6 +12,7 @@ const DISCORD_LOG = process.env.DISCORD_LOG
 const BOT_VERSION = process.env.BOT_VERSION ?? '26.1'
 const WEBHOOK_TOKEN = process.env.WEBHOOK_TOKEN ?? 'test_token_abcdefghijklmnopqrstuvwxyz'
 const FIRST_MESSAGE_ID = '100000000000000001'
+const MOVEMENT_PACKETS = new Set(['position', 'position_look', 'look', 'flying'])
 
 const results = []
 function check (name, ok, detail = '') {
@@ -46,11 +47,15 @@ async function consoleCommand (command, expected, timeout = 15000) {
 
 function joinBot (username) {
   return new Promise((resolve, reject) => {
-    // physicsEnabled: false keeps the bots standing still; simulated movement translated by
-    // ViaBackwards can produce positions newer servers reject as invalid
     const bot = mineflayer.createBot({
       host: '127.0.0.1', port: 25565, username, auth: 'offline', version: BOT_VERSION, physicsEnabled: false
     })
+    // The bots never move, so movement packets are not sent at all: translated for newer
+    // servers they can be rejected as "Invalid move player packet"
+    const write = bot._client.write.bind(bot._client)
+    bot._client.write = (name, params) => {
+      if (!MOVEMENT_PACKETS.has(name)) write(name, params)
+    }
     bot.received = []
     bot.on('messagestr', (message) => {
       bot.received.push(message)
