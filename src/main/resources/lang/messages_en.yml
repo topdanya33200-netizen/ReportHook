@@ -1,0 +1,143 @@
+# ReportHook - English messages (MiniMessage: https://docs.advntr.dev/minimessage/format)
+# Set a message to "" to disable it. {id} also works inside <click> arguments.
+# Report placeholders: <id> <target> <reporter> <reason> <status> <handler> <note> <age>
+#                      <updated> <location> <server> <chat-count> <online>
+
+prefix: "<dark_gray>[<gradient:#ff5f6d:#ffc371>ReportHook</gradient>]</dark_gray> "
+none: "-"
+online: "<green>online"
+offline: "<gray>offline"
+console-name: "Console"
+
+time:
+  days: "d"
+  hours: "h"
+  minutes: "m"
+  seconds: "s"
+
+status:
+  open: "<red>Open"
+  claimed: "<yellow>Claimed"
+  resolved: "<green>Resolved"
+  dismissed: "<gray>Dismissed"
+
+filter:
+  active: "<white>Active"
+  open: "<red>Open"
+  claimed: "<yellow>Claimed"
+  closed: "<gray>Closed"
+  all: "<white>All"
+
+report:
+  usage: "<prefix><gray>Usage: <white>/report \\<player> [reason]"
+  only-players: "<prefix><red>Only players can do that."
+  player-not-found: "<prefix><red><white><name></white> is not online."
+  self: "<prefix><red>You can't report yourself."
+  exempt: "<prefix><red>This player can't be reported."
+  cooldown: "<prefix><red>Please wait <white><time></white> before reporting again."
+  too-long: "<prefix><red>That reason is too long, keep it under <white><max></white> characters."
+  duplicate: "<prefix><yellow>You already reported <white><target></white>, staff will look into it."
+  sent: "<prefix><green>Thanks! Report <white>#<id></white> against <white><target></white> was sent to the staff team."
+  failed: "<prefix><red>Your report could not be saved. Please tell an administrator."
+  reviewed: "<prefix><green>Staff reviewed your report against <white><target></white> (<status><green>). Thank you!"
+
+staff:
+  new-report:
+    - "<prefix><red><bold>New report</bold> <white>#{id}</white> <dark_gray>|</dark_gray> <white><target></white> <gray>reported by <white><reporter>"
+    - "<gray>Reason: <white><reason>"
+    - "<click:run_command:'/reports tp {id}'><hover:show_text:'<gray>Teleport to the player'><aqua>[Teleport]</aqua></hover></click> <click:run_command:'/reports claim {id}'><hover:show_text:'<gray>Take this report'><yellow>[Claim]</yellow></hover></click> <click:run_command:'/reports info {id}'><hover:show_text:'<gray>Show details'><gray>[Info]</gray></hover></click>"
+  join-reminder: "<prefix><yellow>There are <white><count></white> open reports. <click:run_command:'/reports'><hover:show_text:'<gray>Open the report list'><aqua>[Open list]</aqua></hover></click>"
+  status-changed: "<prefix><gray>Report <white>#<id></white> (<white><target></white>) is now <status><gray>."
+  status-broadcast: "<prefix><white><actor></white> <gray>set report <white>#<id></white> (<white><target></white>) to <status><gray>."
+  already-claimed: "<prefix><red>Report #<id> is already claimed by <white><handler></white>. <click:run_command:'/reports unclaim {id}'><hover:show_text:'<gray>Release it first'><yellow>[Unclaim]</yellow></hover></click>"
+  invalid-transition: "<prefix><red>Report #<id> is <status><red> and can't be set to <next><red>."
+  not-found: "<prefix><red>Report #<id> does not exist."
+  error: "<prefix><red>Something went wrong, check the console."
+  teleported: "<prefix><gray>Teleported to <white><target></white> (report <white>#<id></white>)."
+  teleported-last-known: "<prefix><gray><white><target></white> is offline, teleported to where they were reported."
+  no-location: "<prefix><red><target> is offline and the report has no location."
+  info:
+    - "<prefix><white>Report #{id}</white> <dark_gray>|</dark_gray> <status>"
+    - "<gray>Target: <white><target></white> (<online><gray>) <dark_gray>|</dark_gray> <gray>Reporter: <white><reporter>"
+    - "<gray>Reason: <white><reason>"
+    - "<gray>Filed: <white><age> ago</white> on <white><server></white> at <white><location>"
+    - "<gray>Handler: <white><handler></white> <dark_gray>|</dark_gray> <gray>Note: <white><note>"
+    - "<gray>Chat messages attached: <white><chat-count>"
+    - "<click:run_command:'/reports tp {id}'><aqua>[Teleport]</aqua></click> <click:run_command:'/reports claim {id}'><yellow>[Claim]</yellow></click> <click:suggest_command:'/reports resolve {id} '><green>[Resolve]</green></click> <click:suggest_command:'/reports dismiss {id} '><gray>[Dismiss]</gray></click> <click:run_command:'/reports history {target}'><white>[History]</white></click>"
+  info-chat: "<dark_gray>[<time>]</dark_gray> <gray><message>"
+  unknown-player: "<prefix><red><name> has never played on this server."
+  unknown-filter: "<prefix><red>Unknown filter <white><filter></white>. Use active, open, claimed, closed or all."
+  history:
+    empty: "<prefix><gray><white><name></white> has never been reported."
+    header: "<prefix><gray>Last <white><count></white> reports against <white><name></white>:"
+    entry: "<click:run_command:'/reports info {id}'><hover:show_text:'<gray>Show details'><dark_gray>#<id></dark_gray> <status> <gray><reason> <dark_gray>(<age> ago, by <reporter>)</dark_gray></hover></click>"
+  list:
+    empty: "<prefix><gray>No <filter><gray> reports."
+    header: "<prefix><filter> <gray>reports, page <white><page>/<pages></white> (<white><total></white> total):"
+    entry: "<click:run_command:'/reports info {id}'><hover:show_text:'<gray>Show details'><dark_gray>#<id></dark_gray> <white><target></white> <gray>- <reason> <dark_gray>(<status><dark_gray>, <age> ago)</dark_gray></hover></click>"
+    footer: "<click:run_command:'/reports list {filter} {prev}'><aqua>« Previous</aqua></click> <dark_gray>|</dark_gray> <click:run_command:'/reports list {filter} {next}'><aqua>Next »</aqua></click>"
+  reloaded: "<prefix><green>Configuration and messages reloaded."
+  reload-failed: "<prefix><red>Reload failed, check the console."
+
+gui:
+  reasons:
+    title: "Report <target>"
+    click:
+      - ""
+      - "<yellow>Click to report <white><target>"
+  list:
+    title: "Reports: <filter> <dark_gray>(<page>/<pages>)"
+    item-name: "<white>#<id> <target> <dark_gray>| <status>"
+    lore-active:
+      - "<gray>Reason: <white><reason>"
+      - "<gray>Reporter: <white><reporter>"
+      - "<gray>Filed: <white><age> ago"
+      - "<gray>Handler: <white><handler>"
+      - "<gray>Player is <online>"
+      - ""
+      - "<yellow>Left-click <gray>» teleport"
+      - "<yellow>Right-click <gray>» claim / unclaim"
+      - "<yellow>Shift + left <gray>» resolve"
+      - "<yellow>Shift + right <gray>» dismiss"
+    lore-closed:
+      - "<gray>Reason: <white><reason>"
+      - "<gray>Reporter: <white><reporter>"
+      - "<gray>Filed: <white><age> ago"
+      - "<gray>Closed by: <white><handler>"
+      - "<gray>Note: <white><note>"
+      - ""
+      - "<yellow>Left-click <gray>» teleport"
+      - "<yellow>Right-click <gray>» reopen"
+    empty: "<gray>Nothing to review here"
+    previous: "<yellow>« Previous page"
+    next: "<yellow>Next page »"
+    filter: "<gray>Showing: <filter>"
+    filter-lore:
+      - "<gray>Click to show: <next>"
+    summary: "<white>Overview"
+    summary-lore:
+      - "<red>Open: <white><open>"
+      - "<yellow>Claimed: <white><claimed>"
+      - "<green>Resolved: <white><resolved>"
+      - "<gray>Dismissed: <white><dismissed>"
+      - "<dark_gray>Total: <total>"
+    refresh: "<aqua>Refresh"
+
+# Plain text for Discord embeds (no MiniMessage). {id} and {handler} are replaced.
+discord:
+  title: "Report #{id}"
+  footer: "ReportHook"
+  field:
+    reported: "Reported player"
+    reporter: "Reporter"
+    reason: "Reason"
+    server: "Server"
+    location: "Location"
+    status: "Status"
+    note: "Staff note"
+    chat: "Recent chat"
+  status:
+    open: "🔴 Open"
+    claimed: "🟡 Claimed by {handler}"
+    resolved: "🟢 Resolved by {handler}"
+    dismissed: "⚪ Dismissed by {handler}"

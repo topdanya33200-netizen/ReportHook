@@ -1,0 +1,95 @@
+# ReportHook configuration
+# Messages live in lang/messages_<language>.yml. Reload everything with /reports reload.
+
+# Language file to use: en, ru, or your own lang/messages_<code>.yml
+language: en
+
+# Shown in Discord and staff messages. Useful when several servers share one webhook.
+server-name: "Survival"
+
+reports:
+  # Seconds a player has to wait between two reports (bypass: reporthook.bypass.cooldown)
+  cooldown-seconds: 60
+  # Longest allowed reason in characters
+  max-reason-length: 200
+  # Delete resolved and dismissed reports after this many days. 0 keeps them forever.
+  retention-days: 30
+
+# Reasons offered in the /report menu (up to 28). Names and descriptions use MiniMessage.
+# icon is any item name from https://jd.papermc.io/paper/org/bukkit/Material.html
+reasons:
+  cheating:
+    name: "<red>Cheating"
+    icon: DIAMOND_SWORD
+    description:
+      - "<gray>Kill aura, fly, x-ray, auto clicker..."
+  chat:
+    name: "<gold>Chat abuse"
+    icon: WRITABLE_BOOK
+    description:
+      - "<gray>Spam, insults, advertising"
+  griefing:
+    name: "<yellow>Griefing"
+    icon: TNT
+    description:
+      - "<gray>Destroying or stealing builds"
+  exploit:
+    name: "<light_purple>Bug abuse"
+    icon: REDSTONE
+    description:
+      - "<gray>Duping or abusing glitches"
+  scam:
+    name: "<aqua>Scam"
+    icon: EMERALD
+    description:
+      - "<gray>Broken trades, fake deals"
+  other:
+    name: "<white>Other"
+    icon: PAPER
+    description:
+      - "<gray>Anything else"
+
+# Attach the reported player's recent chat to the report, as evidence for chat reports
+chat-context:
+  enabled: true
+  # How many of their last messages to keep
+  messages: 10
+  # Ignore messages older than this
+  max-age-minutes: 10
+
+notifications:
+  # Tell online staff (reporthook.notify) about new reports in chat
+  in-game: true
+  # Sound for staff on a new report. Leave empty for none.
+  sound: "minecraft:block.note_block.pling"
+  # Remind staff about open reports when they join
+  join-reminder: true
+  # Tell the reporter when staff resolved or dismissed their report
+  notify-reporter: true
+
+discord:
+  enabled: false
+  # Channel settings -> Integrations -> Webhooks -> New Webhook -> Copy Webhook URL
+  # Keep this URL private: anyone who has it can post into the channel.
+  webhook-url: ""
+  # Role to ping on new reports: enable Developer Mode, right-click the role -> Copy Role ID
+  mention-role-id: ""
+  # Name and avatar the webhook posts with. Empty values keep the webhook's own.
+  username: "ReportHook"
+  avatar-url: ""
+  # Thumbnail with the reported player's head. {uuid} and {name} are replaced. Empty to disable.
+  thumbnail-url: "https://mc-heads.net/avatar/{uuid}/64"
+  # Edit the original Discord message when a report is claimed, resolved or dismissed
+  update-on-status-change: true
+  # Set to true if the webhook belongs to a forum channel: every report gets its own thread
+  forum-threads: false
+  include-location: true
+  include-chat-context: true
+  colors:
+    open: "#E74C3C"
+    claimed: "#F1C40F"
+    resolved: "#2ECC71"
+    dismissed: "#95A5A6"
+
+# Register %reporthook_open%, %reporthook_active% and friends when PlaceholderAPI is installed
+placeholderapi: true

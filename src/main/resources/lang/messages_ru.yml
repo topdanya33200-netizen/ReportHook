@@ -1,0 +1,143 @@
+# ReportHook - русские сообщения (MiniMessage: https://docs.advntr.dev/minimessage/format)
+# Чтобы отключить сообщение, оставьте "". {id} работает и внутри аргументов <click>.
+# Плейсхолдеры жалобы: <id> <target> <reporter> <reason> <status> <handler> <note> <age>
+#                      <updated> <location> <server> <chat-count> <online>
+
+prefix: "<dark_gray>[<gradient:#ff5f6d:#ffc371>ReportHook</gradient>]</dark_gray> "
+none: "-"
+online: "<green>в сети"
+offline: "<gray>не в сети"
+console-name: "Консоль"
+
+time:
+  days: "д"
+  hours: "ч"
+  minutes: "м"
+  seconds: "с"
+
+status:
+  open: "<red>Открыта"
+  claimed: "<yellow>В работе"
+  resolved: "<green>Решена"
+  dismissed: "<gray>Отклонена"
+
+filter:
+  active: "<white>Активные"
+  open: "<red>Открытые"
+  claimed: "<yellow>В работе"
+  closed: "<gray>Закрытые"
+  all: "<white>Все"
+
+report:
+  usage: "<prefix><gray>Использование: <white>/report \\<игрок> [причина]"
+  only-players: "<prefix><red>Это могут делать только игроки."
+  player-not-found: "<prefix><red>Игрок <white><name></white> не в сети."
+  self: "<prefix><red>Нельзя пожаловаться на самого себя."
+  exempt: "<prefix><red>На этого игрока нельзя пожаловаться."
+  cooldown: "<prefix><red>Подождите <white><time></white>, прежде чем отправить новую жалобу."
+  too-long: "<prefix><red>Причина слишком длинная, уложитесь в <white><max></white> символов."
+  duplicate: "<prefix><yellow>Вы уже пожаловались на <white><target></white>, модераторы разберутся."
+  sent: "<prefix><green>Спасибо! Жалоба <white>#<id></white> на <white><target></white> отправлена модераторам."
+  failed: "<prefix><red>Не удалось сохранить жалобу. Сообщите администратору."
+  reviewed: "<prefix><green>Модераторы рассмотрели вашу жалобу на <white><target></white> (<status><green>). Спасибо!"
+
+staff:
+  new-report:
+    - "<prefix><red><bold>Новая жалоба</bold> <white>#{id}</white> <dark_gray>|</dark_gray> <white><target></white> <gray>от <white><reporter>"
+    - "<gray>Причина: <white><reason>"
+    - "<click:run_command:'/reports tp {id}'><hover:show_text:'<gray>Телепортироваться к игроку'><aqua>[ТП]</aqua></hover></click> <click:run_command:'/reports claim {id}'><hover:show_text:'<gray>Взять жалобу себе'><yellow>[Взять]</yellow></hover></click> <click:run_command:'/reports info {id}'><hover:show_text:'<gray>Подробности'><gray>[Инфо]</gray></hover></click>"
+  join-reminder: "<prefix><yellow>Открытых жалоб: <white><count></white>. <click:run_command:'/reports'><hover:show_text:'<gray>Открыть список жалоб'><aqua>[Открыть]</aqua></hover></click>"
+  status-changed: "<prefix><gray>Жалоба <white>#<id></white> (<white><target></white>) теперь: <status><gray>."
+  status-broadcast: "<prefix><white><actor></white> <gray>изменил статус жалобы <white>#<id></white> (<white><target></white>): <status><gray>."
+  already-claimed: "<prefix><red>Жалобу #<id> уже взял <white><handler></white>. <click:run_command:'/reports unclaim {id}'><hover:show_text:'<gray>Сначала освободите её'><yellow>[Освободить]</yellow></hover></click>"
+  invalid-transition: "<prefix><red>Жалоба #<id> сейчас в статусе <status><red>, его нельзя сменить на <next><red>."
+  not-found: "<prefix><red>Жалобы #<id> не существует."
+  error: "<prefix><red>Что-то пошло не так, подробности в консоли."
+  teleported: "<prefix><gray>Вы телепортированы к <white><target></white> (жалоба <white>#<id></white>)."
+  teleported-last-known: "<prefix><gray><white><target></white> не в сети, вы телепортированы туда, где на него пожаловались."
+  no-location: "<prefix><red><target> не в сети, а координат в жалобе нет."
+  info:
+    - "<prefix><white>Жалоба #{id}</white> <dark_gray>|</dark_gray> <status>"
+    - "<gray>Нарушитель: <white><target></white> (<online><gray>) <dark_gray>|</dark_gray> <gray>Отправил: <white><reporter>"
+    - "<gray>Причина: <white><reason>"
+    - "<gray>Отправлена: <white><age> назад</white> на <white><server></white>, место: <white><location>"
+    - "<gray>Модератор: <white><handler></white> <dark_gray>|</dark_gray> <gray>Заметка: <white><note>"
+    - "<gray>Сообщений чата в жалобе: <white><chat-count>"
+    - "<click:run_command:'/reports tp {id}'><aqua>[ТП]</aqua></click> <click:run_command:'/reports claim {id}'><yellow>[Взять]</yellow></click> <click:suggest_command:'/reports resolve {id} '><green>[Решить]</green></click> <click:suggest_command:'/reports dismiss {id} '><gray>[Отклонить]</gray></click> <click:run_command:'/reports history {target}'><white>[История]</white></click>"
+  info-chat: "<dark_gray>[<time>]</dark_gray> <gray><message>"
+  unknown-player: "<prefix><red>Игрок <name> никогда не заходил на сервер."
+  unknown-filter: "<prefix><red>Неизвестный фильтр <white><filter></white>. Доступны: active, open, claimed, closed, all."
+  history:
+    empty: "<prefix><gray>На <white><name></white> ещё никто не жаловался."
+    header: "<prefix><gray>Последние жалобы на <white><name></white> (<white><count></white>):"
+    entry: "<click:run_command:'/reports info {id}'><hover:show_text:'<gray>Подробности'><dark_gray>#<id></dark_gray> <status> <gray><reason> <dark_gray>(<age> назад, от <reporter>)</dark_gray></hover></click>"
+  list:
+    empty: "<prefix><gray>Жалоб с фильтром «<filter><gray>» нет."
+    header: "<prefix><gray>Жалобы: <filter><gray>, страница <white><page>/<pages></white> (всего <white><total></white>):"
+    entry: "<click:run_command:'/reports info {id}'><hover:show_text:'<gray>Подробности'><dark_gray>#<id></dark_gray> <white><target></white> <gray>- <reason> <dark_gray>(<status><dark_gray>, <age> назад)</dark_gray></hover></click>"
+    footer: "<click:run_command:'/reports list {filter} {prev}'><aqua>« Назад</aqua></click> <dark_gray>|</dark_gray> <click:run_command:'/reports list {filter} {next}'><aqua>Вперёд »</aqua></click>"
+  reloaded: "<prefix><green>Конфиг и сообщения перезагружены."
+  reload-failed: "<prefix><red>Не удалось перезагрузить, подробности в консоли."
+
+gui:
+  reasons:
+    title: "Жалоба на <target>"
+    click:
+      - ""
+      - "<yellow>Нажмите, чтобы пожаловаться на <white><target>"
+  list:
+    title: "Жалобы: <filter> <dark_gray>(<page>/<pages>)"
+    item-name: "<white>#<id> <target> <dark_gray>| <status>"
+    lore-active:
+      - "<gray>Причина: <white><reason>"
+      - "<gray>Отправил: <white><reporter>"
+      - "<gray>Отправлена: <white><age> назад"
+      - "<gray>Модератор: <white><handler>"
+      - "<gray>Игрок <online>"
+      - ""
+      - "<yellow>ЛКМ <gray>» телепорт"
+      - "<yellow>ПКМ <gray>» взять / освободить"
+      - "<yellow>Shift + ЛКМ <gray>» решить"
+      - "<yellow>Shift + ПКМ <gray>» отклонить"
+    lore-closed:
+      - "<gray>Причина: <white><reason>"
+      - "<gray>Отправил: <white><reporter>"
+      - "<gray>Отправлена: <white><age> назад"
+      - "<gray>Закрыл: <white><handler>"
+      - "<gray>Заметка: <white><note>"
+      - ""
+      - "<yellow>ЛКМ <gray>» телепорт"
+      - "<yellow>ПКМ <gray>» открыть заново"
+    empty: "<gray>Здесь пока пусто"
+    previous: "<yellow>« Предыдущая страница"
+    next: "<yellow>Следующая страница »"
+    filter: "<gray>Показаны: <filter>"
+    filter-lore:
+      - "<gray>Нажмите, чтобы показать: <next>"
+    summary: "<white>Сводка"
+    summary-lore:
+      - "<red>Открыто: <white><open>"
+      - "<yellow>В работе: <white><claimed>"
+      - "<green>Решено: <white><resolved>"
+      - "<gray>Отклонено: <white><dismissed>"
+      - "<dark_gray>Всего: <total>"
+    refresh: "<aqua>Обновить"
+
+# Обычный текст для Discord (без MiniMessage). {id} и {handler} подставляются.
+discord:
+  title: "Жалоба #{id}"
+  footer: "ReportHook"
+  field:
+    reported: "Нарушитель"
+    reporter: "Отправил"
+    reason: "Причина"
+    server: "Сервер"
+    location: "Координаты"
+    status: "Статус"
+    note: "Заметка модератора"
+    chat: "Последние сообщения"
+  status:
+    open: "🔴 Открыта"
+    claimed: "🟡 В работе у {handler}"
+    resolved: "🟢 Решена ({handler})"
+    dismissed: "⚪ Отклонена ({handler})"

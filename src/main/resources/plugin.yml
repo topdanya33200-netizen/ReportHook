@@ -1,0 +1,33 @@
+name: ReportHook
+version: '${version}'
+main: io.github.topdanya33200_netizen.reporthook.ReportHookPlugin
+api-version: '26.1'
+description: Player reports with a staff GUI and Discord webhook sync.
+author: topdanya33200-netizen
+website: https://github.com/topdanya33200-netizen/ReportHook
+folia-supported: true
+softdepend: [PlaceholderAPI]
+
+permissions:
+  reporthook.report:
+    description: Report players with /report
+    default: true
+  reporthook.notify:
+    description: Get notified about new reports
+    default: op
+  reporthook.staff:
+    description: Review and manage reports with /reports
+    default: op
+    children:
+      reporthook.notify: true
+  reporthook.admin:
+    description: Reload the plugin
+    default: op
+    children:
+      reporthook.staff: true
+  reporthook.bypass.cooldown:
+    description: Report without waiting for the cooldown
+    default: op
+  reporthook.exempt:
+    description: Cannot be reported
+    default: false
