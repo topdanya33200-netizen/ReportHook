@@ -46,7 +46,11 @@ async function consoleCommand (command, expected, timeout = 15000) {
 
 function joinBot (username) {
   return new Promise((resolve, reject) => {
-    const bot = mineflayer.createBot({ host: '127.0.0.1', port: 25565, username, auth: 'offline', version: BOT_VERSION })
+    // physicsEnabled: false keeps the bots standing still; simulated movement translated by
+    // ViaBackwards can produce positions newer servers reject as invalid
+    const bot = mineflayer.createBot({
+      host: '127.0.0.1', port: 25565, username, auth: 'offline', version: BOT_VERSION, physicsEnabled: false
+    })
     bot.received = []
     bot.on('messagestr', (message) => {
       bot.received.push(message)

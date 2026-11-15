@@ -52,7 +52,6 @@ cat > server/server.properties <<'EOF'
 online-mode=false
 enforce-secure-profile=false
 white-list=false
-level-type=minecraft\:flat
 generate-structures=false
 spawn-protection=0
 view-distance=4
